@@ -28,6 +28,8 @@ def create_domain_knowledge_features(data_df):
            DataFrame. Dataset.
     """
 
-    data_df['Child'] = 0
-    data_df.loc[data_df.Age < 16, 'Child'] = 1
+    data_df['Sex_child'] = 0
+    data_df.loc[data_df.Age < 16, 'Sex_child'] = 1
+    data_df.loc[data_df.Age < 16, 'Sex_male'] = 0
+    data_df.loc[data_df.Age < 16, 'Sex_female'] = 0
     return data_df.copy()

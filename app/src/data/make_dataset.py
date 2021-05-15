@@ -43,7 +43,14 @@ def get_raw_data_from_request(data):
         Returns:
            DataFrame. Dataset con los datos de entrada.
     """
-    return pd.DataFrame(data, columns=init_cols)
+    for key in init_cols:
+        if key not in data.keys():
+            data[key] = None
+
+    try:
+        return (pd.DataFrame(data) if len(data)==len(init_cols) else None)
+    except Exception:
+        return pd.DataFrame(data, index=[0])
 
 
 def transform_data(data_df, model_info, cols_to_remove):
